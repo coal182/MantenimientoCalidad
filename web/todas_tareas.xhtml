@@ -1,0 +1,101 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:t="http://myfaces.apache.org/tomahawk"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>Mantenimiento Preventivo</title>
+                <link href="${facesContext.externalContext.requestContextPath}/bootstrap/css/bootstrap.css" rel="stylesheet" title="default" type="text/css" />
+                <link href="${facesContext.externalContext.requestContextPath}/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" title="default" type="text/css" />
+               
+            </f:facet>
+        </h:head>
+
+        <h:body>
+
+            <p:layout fullPage="true">
+
+                <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
+                    <h1>Gestión DisOfic</h1>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="south" size="100" closable="true" collapsible="true">
+                    <p:ajaxStatus style="width:64px;height:64px;position:fixed;right:5px;bottom:5px">  
+                        <f:facet name="start">  
+                            <p:graphicImage value="/images/loading.gif" />  
+                        </f:facet>  
+
+                        <f:facet name="complete">  
+                            <h:outputText value="" />  
+                        </f:facet>  
+                    </p:ajaxStatus>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="west" size="175" header="Left" collapsible="true">
+                    <p:menu>
+                        <p:submenu label="Resources">
+                            <p:menuitem value="Inicio" url="/" />
+                            <p:menuitem value="Calidad" url="/faces/todas_tareas.xhtml" />
+                            <p:menuitem value="Tareas Pendientes" url="/faces/tareas_pendientes.xhtml" />
+                            <p:menuitem value="Crear Tarea" url="/faces/crear_tarea.xhtml" />
+                         
+
+                        </p:submenu>
+
+                    </p:menu>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="center">
+                    <h:form style="font-size: 12px;">
+                        <p:dataTable id="tabla" var="tarea" value="#{listaTareas.listaTareas}"  
+                             paginator="true" rows="10"  
+                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+                             rowsPerPageTemplate="5,10,15"> 
+                   <f:facet name="header">  
+                        Todas las tareas  
+                    </f:facet> 
+                            <p:column>
+                                <h:outputText value="#{tarea.FECHA}"/>
+                            </p:column>
+                            <p:column>
+
+                                <h:selectBooleanCheckbox value="#{tarea.REALIZADA}"/><br/>
+                            </p:column>
+                            <p:column filterBy="#{tarea.EQUIPO}"  
+                            headerText="EQUIPO" footerText="startsWith">
+                                <h:outputText value="#{tarea.EQUIPO}" style="color: red"/>
+                            </p:column>
+                            <p:column>
+                                <h:outputText value="#{tarea.EXP_ACTIVIDAD}" style="color: blue"/>
+                            </p:column>
+                            <p:column>
+                                <h:outputText value="#{tarea.TIPO_ORDENADOR}" style="color: blue"/>
+                            </p:column>
+                            <p:column>
+                                <h:outputText value="#{tarea.ACTIVIDAD}" style="color: red"/>
+                            </p:column>
+                            <p:column>
+                                <h:outputText value="#{tarea.DIRECCION_IP}" style="color: blue"/>
+                            </p:column>
+                        </p:dataTable>
+
+                        <br/>
+
+                    </h:form>
+                    
+                </p:layoutUnit>
+
+            </p:layout>
+
+        </h:body>
+
+    </f:view>
+
+</html>
+

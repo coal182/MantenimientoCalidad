@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.prime.com.tr/ui">
+
+	<ui:composition template="/WEB-INF/templates/layout.xhtml">	
+		
+		<ui:define name="title">
+			<h:outputText value="#{msg['app_text_1']}" />
+		</ui:define>
+
+		<ui:define name="content">
+			<h:form id="tutoForm">
+				<br/>
+				<p:dataTable id="computers" 
+							 var="computer" 
+							 value="#{tutoView.computers}"
+							 rowEditListener="#{tutoView.rowEditListener}"
+                 			 onRowEditUpdate="messagesGrowl"
+                 			 selection="#{tutoView.computerSelected}" 
+                 			 selectionMode="single" emptyMessage="#{msg['app_text_2']}">  
+				
+					<f:facet name="header">  
+		           		<h:outputText value="#{msg['app_text_3']}"/> 
+		 		    </f:facet>  
+	   
+			         <p:column headerText="#{msg['app_text_4']}" sortBy="#{computer.name}" >  
+			             <p:cellEditor>  
+			                 <f:facet name="output">  
+			                     <h:outputText value="#{computer.name}" />  
+			                 </f:facet>  
+			                 <f:facet name="input">  
+			                     <p:inputText id ="name" value="#{computer.name}"  label="#{msg['app_text_4']}"/>  
+			                 </f:facet>  
+			             </p:cellEditor>  
+			         </p:column>  
+			         
+			         <p:column headerText="#{msg['app_text_5']}" sortBy="#{computer.station}">  
+			             <p:cellEditor>  
+			                 <f:facet name="output">  
+			                      <h:outputText value="#{computer.station}"/>
+			                 </f:facet>  
+			                 <f:facet name="input">  
+			                 	
+			                 	<h:selectOneMenu id="station" value="#{computer.station}" required="true">
+									<f:selectItems value="#{tutoView.stationValues}" var="station"
+										itemLabel="#{msg[station.label]}" itemValue="#{station}">
+									</f:selectItems>
+								</h:selectOneMenu>
+								
+			                 </f:facet>  
+			             </p:cellEditor>  
+	         		</p:column>  
+			        <p:column headerText="#{msg['app_text_6']}" styleClass="ui-editable-column-options" >  
+			            <p:rowEditor/>
+			            <p:commandLink onclick="confirmDelete.show();" >
+			            	<span class="ui-icon ui-icon-remove"></span>
+			            </p:commandLink>
+	         		</p:column>  
+				</p:dataTable>
+
+				<p:confirmDialog id="confirmDialog" message="#{msg['app_text_7']}" header="#{msg['app_text_8']}" severity="alert" widgetVar="confirmDelete" modal="true">
+					<p:commandButton value="#{msg['app_text_9']}" actionListener="#{tutoView.removeComputerListener}" 
+						update="computers" oncomplete="confirmDelete.hide();" />
+					<p:commandButton value="#{msg['app_text_10']}" onclick="confirmDelete.hide();" type="button" />
+				</p:confirmDialog>
+			</h:form>
+		</ui:define>
+
+	</ui:composition>
+</html>

@@ -1,0 +1,54 @@
+/* 
+    Document   : estilos
+    Created on : 23-jul-2012, 9:49:58
+    Author     : cristianmartin
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+
+body{
+    font-size: 14px;
+}
+.ui-dock-container-top, .ui-dock-container-bottom{
+
+}
+.ui-dock-top, .ui-dock-bottom{
+    margin-bottom: 3px;
+    z-index:1001;
+}
+.ui-dock-item-top span, .ui-dock-item-bottom span{
+    color:#048;
+}
+
+textarea.descripcion{
+    font: normal 12px Arial, Helvetica, sans-serif;
+    color: #505050 !important;
+    font-weight: normal !important;
+}
+
+/* Stack */
+body .ui-stack .openStack li span {
+    height: auto;
+}
+
+/* Tablas editables */
+.ui-widget-content .ui-icon.ui-icon-pencil { 
+    background-image: url("/GestionDisofic/images/pencil.png");
+    width: 16px;
+    height: 16px;
+    background-position: 0 0; 
+}
+.ui-widget-content .ui-icon.ui-icon-check { 
+    background-image: url("/GestionDisofic/images/Faenza/media-floppy.png");
+    width: 16px;
+    height: 16px;
+    background-position: 0 0; 
+}
+.ui-widget-content .ui-icon.ui-icon-close { 
+    background-image: url("/GestionDisofic/images/close.png");
+    width: 16px;
+    height: 16px;
+    background-position: 0 0;
+    margin-left: 15px; 
+}
